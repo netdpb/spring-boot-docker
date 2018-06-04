@@ -56,7 +56,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-translate</artifactId>
+    </dependency>
+  </dependencies>
 
 	<dependencyManagement>
 		<dependencies>
@@ -67,7 +71,14 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-		</dependencies>
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-bom</artifactId>
+        <version>0.50.0-alpha</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
 	</dependencyManagement>
 
 	<build>

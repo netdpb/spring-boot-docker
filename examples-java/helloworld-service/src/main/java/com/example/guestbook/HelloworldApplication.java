@@ -15,18 +15,21 @@
  */
 package com.example.guestbook;
 
+import static com.google.cloud.translate.Translate.TranslateOption.sourceLanguage;
+import static com.google.cloud.translate.Translate.TranslateOption.targetLanguage;
+
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 @SpringBootApplication
 public class HelloworldApplication {
@@ -49,10 +52,12 @@ class HelloworldController {
         .replaceAll("\\$name", name)
         .replaceAll("\\$hostname", hostname)
         .replaceAll("\\$version", version);
-
     response.put("greeting", greeting);
     response.put("version", version);
     response.put("hostname", hostname);
+    Translate translate = TranslateOptions.getDefaultInstance().getService();
+    response.put("greeting_fr",
+        translate.translate(greeting, sourceLanguage("en"), targetLanguage("fr"));
 
     return response;
   }
