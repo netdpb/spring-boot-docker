@@ -57,7 +57,8 @@ class HelloworldController {
     response.put("hostname", hostname);
     Translate translate = TranslateOptions.getDefaultInstance().getService();
     response.put("greeting_fr",
-        translate.translate(greeting, sourceLanguage("en"), targetLanguage("fr"));
+        translate.translate(greeting, sourceLanguage("en"), targetLanguage("fr"))
+            .getTranslatedText());
 
     return response;
   }
